@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> DFA CHECKER </title>
+    <link rel="stylesheet" href="DFA.css">
+</head>
+<body>
+
+<main class="container">
+    <section class="checker-panel" aria-labelledby="pageTitle">
+        <h1 id="pageTitle">DFA <i>Input String</i> Checker</h1>
+        <p>Enter a string to check whether it is accepted or rejected by the DFA.</p>
+
+        <div class="checker">
+            <label for="inputString">Input String:</label>
+            <input type="text" id="inputString" placeholder="1010101" autocomplete="off">
+            <button id="checkButton" type="button" disabled>Check</button>
+            <button id="clearButton" type="button" disabled>Clear</button>
+            <p>It only accepts strings over the alphabet {0, 1}.</p>
+            <p id="result" aria-live="polite">Result will be displayed here:</p>
+            <div id="stateFlow" aria-live="polite"></div>
+        </div>
+    </section>
+
+    <aside class="diagram-panel" aria-labelledby="diagramTitle">
+        <h2 id="diagramTitle">DFA FLOW DIAGRAM</h2>
+        <svg class="dfa-diagram" viewBox="0 0 440 275" role="img" aria-labelledby="svgTitle svgDescription">
+            <title id="svgTitle">Two-state DFA for binary strings ending in 1</title>
+            <desc id="svgDescription">The start state q0 loops on 0 and transitions to accepting state q1 on 1. State q1 transitions to q0 on 0 and loops on 1.</desc>
+            <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L8,4 L0,8 Z" class="arrowhead" />
+                </marker>
+            </defs>
+
+            <path id="transition-q0-0" class="transition" d="M87 117 C61 74 126 56 139 99" marker-end="url(#arrowhead)" />
+            <text id="label-q0-0" class="transition-label" x="102" y="68">0</text>
+
+            <path id="transition-q0-1" class="transition" d="M172 130 H270" marker-end="url(#arrowhead)" />
+            <text id="label-q0-1" class="transition-label" x="215" y="119">1</text>
+
+            <path id="transition-q1-1" class="transition" d="M301 99 C314 56 379 74 353 117" marker-end="url(#arrowhead)" />
+            <text id="label-q1-1" class="transition-label" x="330" y="68">1</text>
+
+            <path id="transition-q1-0" class="transition" d="M270 162 H172" marker-end="url(#arrowhead)" />
+            <text id="label-q1-0" class="transition-label" x="215" y="185">0</text>
+
+            <path class="start-arrow" d="M24 140 H75" marker-end="url(#arrowhead)" />
+            <g id="state-q0" class="state-node is-current">
+                <circle class="state" cx="120" cy="140" r="34" />
+                <text class="state-label" x="120" y="146">q0</text>
+            </g>
+
+            <g id="state-q1" class="state-node">
+                <circle class="state accepting-state" cx="320" cy="140" r="34" />
+                <circle class="accepting-ring" cx="320" cy="140" r="28" />
+                <text class="state-label" x="320" y="146">q1</text>
+            </g>
+            <circle id="state-indicator" class="state-indicator" r="6" cx="120" cy="140" aria-hidden="true" />
+        </svg>
+        <p class="diagram-caption">Accepts binary strings that end in 1.</p>
+    </aside>
+
+    <section class="transition-table-panel" aria-labelledby="tableTitle">
+        <h2 id="tableTitle">DFA TRANSITION TABLE</h2>
+        <p id="tableSummary" class="table-summary" aria-live="polite">Each processed character will appear here.</p>
+        <div class="table-scroll" role="region" aria-label="Transition table" tabindex="0">
+            <table aria-describedby="tableSummary">
+                <caption class="visually-hidden">State transitions for the current input string</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Step</th>
+                        <th scope="col">Current State</th>
+                        <th scope="col">Input Symbol</th>
+                        <th scope="col">Next State</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="transitionTableBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+
+<script src="DFA.js"></script>
+</body>
+</html>
